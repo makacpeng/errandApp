@@ -1,0 +1,71 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index"
+		},
+		{
+			"path" : "pages/orders/orders",
+			"style" : 
+			{
+				"navigationBarTitleText" : "订 单"
+			}
+		},
+		{
+			"path" : "pages/me/me",
+			"style" : 
+			{
+				"navigationBarTitleText" : "我 的"
+			}
+		},
+		{
+			"path" : "pages/login/login",
+			"style" : 
+			{
+				"navigationBarTitleText" : "登 录"
+			}
+		},
+		{
+			"path" : "pages/register/register",
+			"style" : 
+			{
+				"navigationBarTitleText" : "注 册"
+			}
+		}
+	],
+	"globalStyle": {
+	  // 导航栏标题颜色及状态栏前景颜色，仅支持 black/white
+	  "navigationBarTextStyle": "white",
+	  // 导航栏标题文字内容
+	  "navigationBarTitleText": "校园跑腿",
+	  // 导航栏背景颜色（同状态栏背景色）
+	  "navigationBarBackgroundColor": "#006eff",
+	  //  下拉显示出来的窗口的背景色
+	  "backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+	  "backgroundColor": "#fff",
+	  "selectedColor": "#006eff",
+	  "color": "#666",
+	  "list": [
+	    {
+	      "iconPath": "/static/icons/home.png",
+	      "selectedIconPath": "static/icons/home-active.png",
+	      "text": "首页",
+	      "pagePath": "pages/index/index"
+	    },
+	    {
+	      "iconPath": "/static/icons/orders.png",
+	      "selectedIconPath": "static/icons/orders-active.png",
+	      "text": "订单",
+	      "pagePath": "pages/orders/orders"
+	    },
+	    {
+	      "iconPath": "/static/icons/me.png",
+	      "selectedIconPath": "static/icons/me-active.png",
+	      "text": "我的",
+	      "pagePath": "pages/me/me"
+	    }
+	  ]
+	},
+	"uniIdRouter": {}
+}
