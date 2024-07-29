@@ -1,8 +1,10 @@
 package com.example.controller;
 
+import cn.hutool.log.Log;
 import com.example.common.Result;
 import com.example.entity.Orders;
 import com.example.service.OrdersService;
+import com.example.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
@@ -11,12 +13,25 @@ import java.util.List;
 /**
  * 订单信息前端操作接口
  **/
+
+
 @RestController
 @RequestMapping("/orders")
 public class OrdersController {
 
     @Resource
     private OrdersService ordersService;
+
+
+    /**
+     * 小程序下单
+     */
+    @PostMapping("/addOrder")
+    public Result addOrder(@RequestBody Orders orders) {
+        ordersService.addOrder(orders);
+        return Result.success();
+    }
+
 
     /**
      * 新增

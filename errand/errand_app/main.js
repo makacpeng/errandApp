@@ -9,6 +9,10 @@ import request from '@/utils/request.js'
 
 Vue.prototype.$request = request
 
+import apiConfig from '@/config.js'
+ 
+Vue.prototype.$baseUrl = process.env.NODE_ENV === "development" ? apiConfig.dev.baseUrl : apiConfig.prod.baseUrl
+
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({

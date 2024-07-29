@@ -1,5 +1,8 @@
 package com.example.common.enums;
 
+import com.example.entity.Account;
+import org.springframework.context.support.BeanDefinitionDsl;
+
 public enum ResultCodeEnum {
     SUCCESS("200", "成功"),
 
@@ -15,7 +18,11 @@ public enum ResultCodeEnum {
     USER_NOT_EXIST_ERROR("5004", "用户不存在"),
     PARAM_PASSWORD_ERROR("5005", "原密码输入错误"),
 
-    ROLE_ERROR("5006", "角色错误");
+    ROLE_ERROR("5006", "角色错误"),
+    ACCOUNT_LIMIT_ERROR("5007", "余额不足"),
+    ;
+
+
 
     public String code;
     public String msg;

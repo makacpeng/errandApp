@@ -25,12 +25,20 @@
 			}
 		},
 		{
-			"path" : "pages/register/register",
+			"path" : "pages/preOrder/preOrder",
 			"style" : 
 			{
-				"navigationBarTitleText" : "注 册"
+				"navigationBarTitleText" : "下 单"
+			}
+		},
+		{
+			"path" : "pages/address/address",
+			"style" : 
+			{
+				"navigationBarTitleText" : "我的地址"
 			}
 		}
+	
 	],
 	"globalStyle": {
 	  // 导航栏标题颜色及状态栏前景颜色，仅支持 black/white
@@ -66,6 +74,6 @@
 	      "pagePath": "pages/me/me"
 	    }
 	  ]
-	},
-	"uniIdRouter": {}
+	}
+	
 }

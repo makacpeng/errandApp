@@ -36,6 +36,20 @@ public class Orders {
     // 接单人名称
     private String acceptName;
 
+
+    //已下单多少分钟
+    private Integer range;
+
+    public Integer getRange() {
+        return range;
+    }
+
+    public void setRange(Integer range) {
+        this.range = range;
+    }
+
+
+
     public String getUserName() {
         return userName;
     }
