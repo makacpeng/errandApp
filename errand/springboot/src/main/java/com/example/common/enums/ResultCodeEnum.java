@@ -20,6 +20,7 @@ public enum ResultCodeEnum {
 
     ROLE_ERROR("5006", "角色错误"),
     ACCOUNT_LIMIT_ERROR("5007", "余额不足"),
+    CERTIFICATION_ERROR("5008", "您已提交过认证信息"),
     ;
 
 

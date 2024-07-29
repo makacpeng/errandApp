@@ -35,4 +35,5 @@ public interface CertificationMapper {
      */
     List<Certification> selectAll(Certification certification);
 
+    Certification selectByUserId(Integer userId);
 }

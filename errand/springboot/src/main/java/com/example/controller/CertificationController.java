@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.common.Result;
 import com.example.entity.Certification;
+import com.example.mapper.CertificationMapper;
 import com.example.service.CertificationService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
@@ -17,16 +18,13 @@ public class CertificationController {
 
     @Resource
     private CertificationService certificationService;
-
     /**
      * 新增
      */
-    public void add(Certification certification) {
-        Certification dbCert = certificationMapper.selectByUserId(certification.getUserId());
-        if (dbCert != null) {
-            throw new CustomException(ResultCodeEnum.CERTIFICATION_ERROR);
-        }
-        certificationMapper.insert(certification);
+    @PostMapping("/add")
+    public Result add(@RequestBody Certification certification) {
+        certificationService.add(certification);
+        return Result.success();
     }
 
     /**
@@ -83,6 +81,15 @@ public class CertificationController {
                              @RequestParam(defaultValue = "10") Integer pageSize) {
         PageInfo<Certification> page = certificationService.selectPage(certification, pageNum, pageSize);
         return Result.success(page);
+    }
+
+    /**
+     * 查询当前用户的认证信息
+     */
+    @GetMapping("/selectUserCertification")
+    public Result selectUserCertification() {
+        Certification certification = certificationService.selectUserCertification();
+        return Result.success(certification);
     }
 
 }

@@ -35,6 +35,13 @@
         where id = #{id}
     </select>
 
+    <select id="selectByUserId" resultType="com.example.entity.Certification">
+        select
+        <include refid="Base_Column_List" />
+        from certification
+        where user_id = #{userId}
+    </select>
+
     <delete id="deleteById">
         delete from certification
         where  id = #{id}

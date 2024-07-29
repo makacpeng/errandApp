@@ -1,7 +1,11 @@
 package com.example.service;
 
+import com.example.common.enums.ResultCodeEnum;
+import com.example.entity.Account;
 import com.example.entity.Certification;
+import com.example.exception.CustomException;
 import com.example.mapper.CertificationMapper;
+import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -22,7 +26,19 @@ public class CertificationService {
      * 新增
      */
     public void add(Certification certification) {
+        Certification dbCert = certificationMapper.selectByUserId(certification.getUserId());
+        if (dbCert != null) {
+            throw new CustomException(ResultCodeEnum.CERTIFICATION_ERROR);
+        }
         certificationMapper.insert(certification);
+    }
+
+    /**
+     * 查询当前用户的认证信息
+     */
+    public Certification selectUserCertification(){
+        Account currentUser = TokenUtils.getCurrentUser();
+        return certificationMapper.selectByUserId(currentUser.getId());
     }
 
     /**
@@ -70,5 +86,9 @@ public class CertificationService {
         List<Certification> list = certificationMapper.selectAll(certification);
         return PageInfo.of(list);
     }
+
+
+
+
 
 }
