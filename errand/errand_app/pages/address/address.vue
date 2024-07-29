@@ -114,14 +114,17 @@
 			},
 			save() {
 				this.$refs.formRef.validate().then(res => {
+					this.form.userId = this.user.id
 					this.$request.post('/address/add', this.form).then(res => {
 						if (res.code === '200') {
 							uni.showToast({
 								icon: 'success',
 								title: '操作成功'
 							})
-		
-							this.selectAddress(res.data)  // 设置地址信息到缓存
+							if(this.addressType){
+								this.selectAddress(res.data)  // 设置地址信息到缓存
+							}
+							
 							
 							this.form = {}
 							this.load()

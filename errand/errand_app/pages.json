@@ -58,6 +58,27 @@
 			{
 				"navigationBarTitleText" : "订单详情"
 			}
+		},
+		{
+			"path" : "pages/introduce/introduce",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/agreement/agreement",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/person/person",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
 	
 	],
