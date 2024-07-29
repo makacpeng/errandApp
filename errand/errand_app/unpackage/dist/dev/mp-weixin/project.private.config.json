@@ -8,22 +8,15 @@
     "miniprogram": {
       "list": [
         {
-          "name": "登录页",
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/index/",
           "pathName": "pages/login/login",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "下单",
-          "pathName": "pages/preOrder/preOrder",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "地址",
-          "pathName": "pages/address/address",
           "query": "",
           "launchMode": "default",
           "scene": null

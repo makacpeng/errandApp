@@ -1,7 +1,8 @@
 <template>
-	<view style="padding: 20rpx;">
+	<view  class="layout">
 		<view style="margin-bottom: 20rpx;">
-			<swiper circular autoplay :interval="3000" :duration="500" indicator-dots style="height: 320rpx;" 
+			<!-- 首页轮播图 -->
+			<swiper class="banner" circular autoplay :interval="5000" :duration="500" indicator-dots style="height: 320rpx;" 
 			  indicator-color="rgba(255, 255, 255, 0.6)" indicator-active-color="#006eff">
 			  <swiper-item v-for="item in imgs" :key="item" >
 			    <image :src="item" alt="" style="width: 100%; height: 350rpx;" />
@@ -13,28 +14,38 @@
 			<uni-notice-bar v-if="content" show-icon single :text="content" />
 		</view>
 		
-		<view style="display: flex; margin-bottom: 20rpx;" class="box">
-			<view class="cartegory-item" @click="goPreOrder('代拿快递')">
-				<image src="../../static/imgs/快递.png" style="width: 50%;" mode="widthFix"></image>
-				<view style="flex: 1;">代拿快递</view>
+		<!-- 功能栏 -->
+		<view class="func">
+			<view class="big" @click="goPreOrder('代拿快递')">
+				<image src="../../static/imgs/快递.png" ></image>
+				<view>代拿快递</view>
 			</view>
-			<view class="cartegory-item" @click="goPreOrder('代取餐品')">
-				<image src="../../static/imgs/取餐.png" style="width: 50%;" mode="widthFix"></image>
-				<view style="flex: 1;">代取餐品</view>
+			<view class="small1" style="border-bottom-left-radius: 0;" @click="goPreOrder('代取餐品')">
+				<image src="../../static/imgs/取餐.png" ></image>
+				<view>代取餐品</view>
 			</view>
-			<view class="cartegory-item" @click="goPreOrder('代买零食')">
-				<image src="../../static/imgs/零食.png" style="width: 50%;" mode="widthFix"></image>
-				<view style="flex: 1;">代买零食</view>
-			</view>
-			<view class="cartegory-item" @click="goPreOrder('代送鲜花')">
-				<image src="../../static/imgs/花.png" style="width: 50%;" mode="widthFix"></image>
-				<view style="flex: 1;">代送鲜花</view>
+			<view class="small2" style="border-top-left-radius: 0;" @click="goPreOrder('代买零食')">
+				<image src="../../static/imgs/零食.png"></image>
+				<view>代买零食</view>
 			</view>
 		</view>
 		
-		<view class="box" style="color: #006eff; font-weight: bold; margin-bottom: 10rpx;">跑腿订单</view>
+		<!-- 鲜花配送和更多 -->
+		<view class="box1" @click="goPreOrder('代送鲜花')">
+			<view class="flower">
+				<image src="../../static/imgs/花.png"></image>
+				<view style="flex: 1;">代送鲜花</view>
+			</view>
+			<view class="more">
+				<image src="../../static/imgs/花.png"></image>
+				<view style="flex: 1;">敬请期待</view>
+			</view>
+		</view>
+		
+		
+		<view class="box2" style="color: #006eff; font-weight: bold; margin-bottom: 10rpx;">跑腿订单</view>
 		<view>
-			<view v-for="item in orderList" :key="item.id" class="box" style="margin-bottom: 10rpx;" @click="goDetail(item.id)">
+			<view v-for="item in orderList" :key="item.id" class="box2" style="margin-bottom: 10rpx;" @click="goDetail(item.id)">
 				<view style="display: flex; align-items: center; margin-bottom: 20rpx;">
 					<view style="flex: 1;">
 						<uni-tag text="餐品" size="small" type="success" v-if="item.type === '代取餐品'"></uni-tag>
@@ -155,13 +166,124 @@
 	}
 </script>
 
-<style>
-	.cartegory-item {
-		flex: 1; 
-		display: flex; 
-		justify-content: space-between; 
-		align-items: center; 
-		flex-direction: column; 
-		grid-gap: 20rpx;
+<style lang="scss">
+	
+	
+	.layout{
+		.banner{
+			width: 700rpx;
+			margin: 0 auto;
+			margin-top: 30rpx;
+		}
+		.func{
+			background-color: rgba(255,255,255,0);
+			width: 700rpx;
+			height: 380rpx;
+			display: grid;
+			grid-template-columns:repeat(2,1fr);
+			gap: 0;
+			padding:0;
+			margin: 0 auto;
+			text-align: center;
+			font-size: 36rpx;
+			.big{
+				z-index: 1;
+				grid-column: 1/1;
+				grid-row: 1/3;
+				background-color: #fff;
+				border-radius: 15rpx;
+				position: relative;
+				display: flex;
+				flex-flow: column;
+				justify-content: center;
+				align-items: center;
+				image{
+					height: 250rpx;
+					width: 250rpx;
+				}
+				
+				
+			}
+			.big::after{
+				z-index: 2;
+				content: "";
+				position: absolute;
+				// background-color: skyblue;
+				height: 355rpx;
+				width: 0;
+				border: 1rpx dashed #f8cbc7;
+				right: 0;
+				top: 15rpx;
+			}
+			
+			.small1,.small2{
+				position: relative;
+				background: #fff;
+				border-radius: 15rpx;
+				display: flex;
+				flex-flow: column;
+				justify-content: center;
+				align-items: center;
+				image{
+					height: 120rpx;
+					width: 120rpx;
+				}
+			}
+			
+			.small1::after{
+				content: "";
+				position: absolute;
+				width: 325rpx;
+				height: 0;
+				border: 1rpx dashed #f8cbc7;
+				bottom: 0;
+				left: 0rpx;
+			}
+			
+		}
+		
+		.box1{
+			
+			background: transparent;
+			width: 700rpx;
+			height: 150rpx;
+			margin: 0 auto;
+			margin-top: 30rpx;
+			margin-bottom: 30rpx;
+			display: grid;
+			grid-template-columns: repeat(2,1fr);
+			
+			.flower,.more{
+				position: relative;
+				display: flex;
+				align-items: center;
+				border-radius: 15rpx;
+				background-color: #fff;
+				image{
+					width: 180rpx;
+					height: 150rpx;
+				}
+			}
+			.flower::after{
+				content: "";
+				position: absolute;
+				height: 120rpx;
+				width: 0;
+				border: 1rpx dashed #f8cbc7;
+				right: 0;
+				
+			}
+		}
+		
+		.box2{
+			box-sizing: border-box;
+			width: 700rpx;
+			margin: 0 auto;
+			background-color: #fff;
+			padding: 20rpx;
+			border-radius: 10rpx;
+			box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, .1);
+		}
 	}
+	
 </style>

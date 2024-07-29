@@ -16,7 +16,7 @@
 /*每个页面公共css */
 
 page {
-	/* 定义根节点的最小高度为整个窗口的高度 */
+	
 	min-height: 100vh;
 	background-color: #eee;
 	font-size: 28rpx;
