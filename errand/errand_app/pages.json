@@ -25,6 +25,13 @@
 			}
 		},
 		{
+			"path" : "pages/register/register",
+			"style" : 
+			{
+				"navigationBarTitleText" : "注 册"
+			}
+		},
+		{
 			"path" : "pages/preOrder/preOrder",
 			"style" : 
 			{
@@ -36,6 +43,20 @@
 			"style" : 
 			{
 				"navigationBarTitleText" : "我的地址"
+			}
+		},
+		{
+			"path" : "pages/comment/comment",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/detail/detail",
+			"style" : 
+			{
+				"navigationBarTitleText" : "订单详情"
 			}
 		}
 	

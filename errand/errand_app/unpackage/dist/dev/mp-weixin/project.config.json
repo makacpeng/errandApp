@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "description": "项目配置文件。",
   "packOptions": {
     "ignore": [],
@@ -25,22 +26,50 @@
     "search": {
       "current": -1,
       "list": []
+=======
+    "description": "项目配置文件。",
+    "packOptions": {
+        "ignore": [],
+        "include": []
     },
-    "conversation": {
-      "current": -1,
-      "list": []
+    "setting": {
+        "urlCheck": false,
+        "es6": false,
+        "postcss": false,
+        "minified": false,
+        "newFeature": true,
+        "bigPackageSizeSupport": true,
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        }
+>>>>>>> 8f2ee3aa1c5cb59324b1934cdda3a9973ae66721
     },
-    "game": {
-      "current": -1,
-      "list": []
+    "compileType": "miniprogram",
+    "libVersion": "3.5.1",
+    "appid": "wx584ac9935cf29691",
+    "projectname": "errand_app",
+    "condition": {
+        "search": {
+            "current": -1,
+            "list": []
+        },
+        "conversation": {
+            "current": -1,
+            "list": []
+        },
+        "game": {
+            "current": -1,
+            "list": []
+        },
+        "miniprogram": {
+            "current": -1,
+            "list": []
+        }
     },
-    "miniprogram": {
-      "current": -1,
-      "list": []
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 4
     }
-  },
-  "editorSetting": {
-    "tabIndent": "insertSpaces",
-    "tabSize": 2
-  }
 }

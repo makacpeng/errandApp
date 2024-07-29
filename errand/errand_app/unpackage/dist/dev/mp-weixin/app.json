@@ -4,8 +4,11 @@
     "pages/orders/orders",
     "pages/me/me",
     "pages/login/login",
+    "pages/register/register",
     "pages/preOrder/preOrder",
-    "pages/address/address"
+    "pages/address/address",
+    "pages/comment/comment",
+    "pages/detail/detail"
   ],
   "subPackages": [],
   "window": {

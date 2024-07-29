@@ -6,6 +6,7 @@ import cn.hutool.core.util.IdUtil;
 import com.example.common.enums.OrderStatusEnum;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.entity.Account;
+import com.example.entity.Address;
 import com.example.entity.Orders;
 import com.example.entity.User;
 import com.example.exception.CustomException;
@@ -31,6 +32,10 @@ public class OrdersService {
 
     @Resource
     UserService userService;
+
+    @Resource
+    AddressService addressService;
+
 
     @Resource
     private OrdersMapper ordersMapper;
@@ -70,7 +75,12 @@ public class OrdersService {
      * 根据ID查询
      */
     public Orders selectById(Integer id) {
-        return ordersMapper.selectById(id);
+        Orders orders = ordersMapper.selectById(id);
+        Address address = addressService.selectById(orders.getAddressId());
+        orders.setAddress(address);  // 取货地址
+        Address targetAddress = addressService.selectById(orders.getTargetId());
+        orders.setTargetAddress(targetAddress);  // 收货地址
+        return orders;
     }
 
     /**
