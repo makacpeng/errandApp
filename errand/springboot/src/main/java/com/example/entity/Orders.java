@@ -39,6 +39,26 @@ public class Orders {
 
     //已下单多少分钟
     private Integer range;
+    //取货地址
+    private  Address address;
+    //收货地址
+    private  Address targetAddress;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Address getTargetAddress() {
+        return targetAddress;
+    }
+
+    public void setTargetAddress(Address targetAddress) {
+        this.targetAddress = targetAddress;
+    }
 
     public Integer getRange() {
         return range;

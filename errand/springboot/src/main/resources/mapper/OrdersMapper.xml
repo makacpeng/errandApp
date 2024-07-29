@@ -20,6 +20,7 @@
             <if test="orderNo != null"> and orders.order_no = #{orderNo}</if>
             <if test="name != null"> and orders.name like concat('%', #{name}, '%')</if>
             <if test="status != null"> and orders.status = #{status}</if>
+            <if test="userId != null"> and orders.user_id = #{userId}</if>
         </where>
         order by id desc
     </select>

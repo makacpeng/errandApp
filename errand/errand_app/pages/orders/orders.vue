@@ -1,46 +1,19 @@
 <template>
 	<view style="padding: 20rpx;">
-		<view style="margin-bottom: 20rpx;">
-			<swiper circular autoplay :interval="3000" :duration="500" indicator-dots style="height: 320rpx;" 
-			  indicator-color="rgba(255, 255, 255, 0.6)" indicator-active-color="#006eff">
-			  <swiper-item v-for="item in imgs" :key="item" >
-			    <image :src="item" alt="" style="width: 100%; height: 350rpx;" />
-			  </swiper-item>
-			</swiper>
+		<view style="margin-bottom: 10rpx;">
+			<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" styleType="text"
+				activeColor="#006eff"></uni-segmented-control>
 		</view>
-		
-		<view style="margin-bottom: 20rpx;">
-			<uni-notice-bar v-if="content" show-icon single :text="content" />
-		</view>
-		
-		<view style="display: flex; margin-bottom: 20rpx;" class="box">
-			<view class="cartegory-item" @click="goPreOrder('代拿快递')">
-				<image src="../../static/imgs/快递.png" style="width: 50%;" mode="widthFix"></image>
-				<view style="flex: 1;">代拿快递</view>
-			</view>
-			<view class="cartegory-item" @click="goPreOrder('代取餐品')">
-				<image src="../../static/imgs/取餐.png" style="width: 50%;" mode="widthFix"></image>
-				<view style="flex: 1;">代取餐品</view>
-			</view>
-			<view class="cartegory-item" @click="goPreOrder('代买零食')">
-				<image src="../../static/imgs/零食.png" style="width: 50%;" mode="widthFix"></image>
-				<view style="flex: 1;">代买零食</view>
-			</view>
-			<view class="cartegory-item" @click="goPreOrder('代送鲜花')">
-				<image src="../../static/imgs/花.png" style="width: 50%;" mode="widthFix"></image>
-				<view style="flex: 1;">代送鲜花</view>
-			</view>
-		</view>
-		
-		<view class="box" style="color: #006eff; font-weight: bold; margin-bottom: 10rpx;">跑腿订单</view>
+
 		<view>
-			<view v-for="item in orderList" :key="item.id" class="box" style="margin-bottom: 10rpx;" @click="goDetail(item.id)">
+			<view v-for="item in orderList" :key="item.id" class="box" style="margin-bottom: 10rpx;"
+				@click="goDetail(item.id)">
 				<view style="display: flex; align-items: center; margin-bottom: 20rpx;">
 					<view style="flex: 1;">
 						<uni-tag text="餐品" size="small" type="success" v-if="item.type === '代取餐品'"></uni-tag>
-						<uni-tag text="快递" size="small" type="primary" v-if="item.type === '代拿快递'"></uni-tag> 
-						<uni-tag text="零食" size="small" type="warning" v-if="item.type === '代买零食'"></uni-tag> 
-						<uni-tag text="鲜花" size="small" type="error" v-if="item.type === '代送鲜花'"></uni-tag> 
+						<uni-tag text="快递" size="small" type="primary" v-if="item.type === '代拿快递'"></uni-tag>
+						<uni-tag text="零食" size="small" type="warning" v-if="item.type === '代买零食'"></uni-tag>
+						<uni-tag text="鲜花" size="small" type="error" v-if="item.type === '代送鲜花'"></uni-tag>
 						<text style="margin-left: 10rpx;">{{ item.name }}</text>
 					</view>
 					<view style="flex: 1; text-align: right;">
@@ -48,18 +21,39 @@
 						<text style="color: red; font-size: 34rpx;">￥{{ item.price }}</text>
 					</view>
 				</view>
-				
+
 				<view style="display: flex; align-items: center;">
 					<view style="flex: 1;">
-						<text style="margin-right: 10rpx;">已下单{{ item.range }}分钟</text>
-						<text style="color: orange;">待接单</text>
+						<text style="margin-right: 20rpx;"
+							v-if="item.status === '待接单' || item.status === '待送达' || item.status === '待收货'">已下单{{ item.range }}分钟</text>
+
+						<text style="color: #888;" v-if="item.status === '已取消'">{{ item.status }}</text>
+						<text style="color: orange;" v-if="item.status === '待接单'">{{ item.status }}</text>
+						<text style="color: dodgerblue" v-if="item.status === '待送达'">{{ item.status }}</text>
+						<text style="color: mediumpurple;" v-if="item.status === '待收货'">{{ item.status }}</text>
+						<text style="color: indianred;" v-if="item.status === '待评价'">{{ item.status }}</text>
+						<text style="color: #18bc37;" v-if="item.status === '已完成'">{{ item.status }}</text>
 					</view>
 					<view style="flex: 1; text-align: right;">
-						<uni-tag text="接单" type="primary" size="small" @click.native.stop="accept(item)"></uni-tag>
+						<view style="display: inline-block;" v-if="item.status === '已取消' || item.status === '已完成'">
+							<uni-icons type="trash" size="18" color="#888"
+								style="position: relative; top: 4rpx;"></uni-icons>
+							<text style="color: #888;" @click.native.stop="handleDel(item.id)">删除</text>
+						</view>
+						<uni-tag text="确认收货" type="primary" size="small" v-if="item.status === '待收货'"></uni-tag>
 					</view>
 				</view>
 			</view>
 		</view>
+		
+		<view>
+			<!-- 提示窗示例 -->
+			<uni-popup ref="alertDialog" type="dialog">
+				<uni-popup-dialog :type="msgType" cancelText="取消" confirmText="确认" title="删除确认" content="您确认删除订单吗？" 
+					@confirm="del"></uni-popup-dialog>
+			</uni-popup>
+		</view>
+
 	</view>
 </template>
 
@@ -67,35 +61,19 @@
 	export default {
 		data() {
 			return {
-				imgs: [
-				  require('../../static/imgs/banner1.png'),
-				  require('../../static/imgs/banner2.png'),
-				],
-				content: '',
-				noticeList: [],
-				inter: null,
+				items: ['全部订单', '待接单', '待送达', '待收货', '待评价'],
 				orderList: [],
-				user: uni.getStorageSync('xm-user')
+				current: '全部订单',
+				user: uni.getStorageSync('xm-user'),
+				orderId: 0
 			}
 		},
 		onShow() {
 			this.load()
-			this.loadNotice()
-		},
-		onHide() {
-			clearInterval(this.inter)
-			this.inter = null
 		},
 		methods: {
-			accept(orders) {
-				if (!this.user.isRider) {  // 判断是否是骑手
-					uni.showToast({
-						icon: 'none',
-						title: '只有认证骑手才可以接单'
-					})
-					return
-				}
-				this.$request.put('/orders/accept', orders).then(res => {
+			del() {
+				this.$request.del('/orders/delete/' + this.orderId).then(res => {
 					if (res.code === '200') {
 						uni.showToast({
 							icon: 'success',
@@ -110,87 +88,34 @@
 					}
 				})
 			},
+			handleDel(orderId) {
+				this.orderId = orderId
+				this.$refs.alertDialog.open()
+			},
 			goDetail(orderId) {
 				uni.navigateTo({
 					url: '/pages/detail/detail?orderId=' + orderId
 				})
 			},
-			goPreOrder(type) {
-				let orderStore = uni.getStorageSync('orderStore') || {}  // 先获取缓存的数据
-				orderStore.type = type   // 设置订单的类型
-				uni.setStorageSync('orderStore', orderStore)
-				uni.navigateTo({
-					url: '/pages/preOrder/preOrder'
-				})
+			onClickItem(e) { // 点击菜单的时候触发
+				this.current = this.items[e.currentIndex]
+				this.load()
 			},
 			load() {
-				this.$request.get('/orders/selectAll', {
-					status: '待接单'
-				}).then(res => {
+				let params = {
+					userId: this.user.id
+				}
+				if (this.current !== '全部订单') {
+					params.status = this.current
+				}
+				this.$request.get('/orders/selectAll', params).then(res => {
 					this.orderList = res.data || []
 				})
-			},
-			loadNotice() {
-				this.$request.get('/notice/selectAll').then(res => {
-					this.noticeList = res.data || []
-					
-					let i = 0
-					this.content = this.noticeList.length ? this.noticeList[i].content : ''
-					
-					// 切换展示公告内容
-					if (this.noticeList.length > 1) {
-						this.inter = setInterval(() => {
-							i++
-							if (i === this.noticeList.length) {
-								i = 0
-							}
-							this.content = this.noticeList[i].content
-						}, 5000)
-					}
-				
-				})
 			}
-			
 		}
 	}
 </script>
 
 <style>
-	.cartegory-item {
-		flex: 1; 
-		display: flex; 
-		justify-content: space-between; 
-		align-items: center; 
-		flex-direction: column; 
-		grid-gap: 20rpx;
-	}
+
 </style>
-
-
-
-
-
-
-
-<!-- <template>
-	<view>
-		订单
-	</view>
-</template>
-
-<script>
-	export default {
-		data() {
-			return {
-				
-			}
-		},
-		methods: {
-			
-		}
-	}
-</script>
-
-<style>
-
-</style> -->
