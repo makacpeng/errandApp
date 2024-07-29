@@ -21,10 +21,12 @@ public class CertificationController {
     /**
      * 新增
      */
-    @PostMapping("/add")
-    public Result add(@RequestBody Certification certification) {
-        certificationService.add(certification);
-        return Result.success();
+    public void add(Certification certification) {
+        Certification dbCert = certificationMapper.selectByUserId(certification.getUserId());
+        if (dbCert != null) {
+            throw new CustomException(ResultCodeEnum.CERTIFICATION_ERROR);
+        }
+        certificationMapper.insert(certification);
     }
 
     /**

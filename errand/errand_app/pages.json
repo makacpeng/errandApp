@@ -79,6 +79,13 @@
 			{
 				"navigationBarTitleText" : ""
 			}
+		},
+		{
+			"path" : "pages/certification/certification",
+			"style" : 
+			{
+				"navigationBarTitleText" : "骑手认证"
+			}
 		}
 	
 	],

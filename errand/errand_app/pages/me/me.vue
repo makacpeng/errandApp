@@ -32,7 +32,7 @@
 		<view style="margin: 20rpx 0; " class="box">
 			<view class="title">骑手服务</view>
 			<view style="display: flex;">
-				<view class="cartegory-item" @click="goPage('')">
+				<view class="cartegory-item" @click="goPage('/pages/certification/certification')">
 					<image src="../../static/imgs/认证.png" style="width: 30%;" mode="widthFix"></image>
 					<view style="flex: 1;">骑手认证</view>
 				</view>
