@@ -70,7 +70,10 @@
 		},
 		onShow() {
 			this.form = uni.getStorageSync('xm-user')
-			this.imgs.push({ url: this.form.avatar })
+			if(this.form.avatar){
+				this.imgs[0] = { url: this.form.avatar }
+			}
+			
 		},
 		methods: {
 			save() {

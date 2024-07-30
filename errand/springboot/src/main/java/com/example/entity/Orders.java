@@ -43,6 +43,16 @@ public class Orders {
     private  Address address;
     //收货地址
     private  Address targetAddress;
+    //骑手信息
+    private Certification certification;
+
+    public Certification getCertification() {
+        return certification;
+    }
+
+    public void setCertification(Certification certification) {
+        this.certification = certification;
+    }
 
     public Address getAddress() {
         return address;

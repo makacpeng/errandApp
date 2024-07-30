@@ -70,6 +70,15 @@ public class OrdersController {
     }
 
     /**
+     * 骑手接单
+     */
+    @PutMapping("/accept")
+    public Result accept(@RequestBody Orders orders) {
+        ordersService.accept(orders);
+        return Result.success();
+    }
+
+    /**
      * 根据ID查询
      */
     @GetMapping("/selectById/{id}")

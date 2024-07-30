@@ -77,14 +77,24 @@
 			"path" : "pages/person/person",
 			"style" : 
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "个人资料",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path" : "pages/certification/certification",
 			"style" : 
 			{
-				"navigationBarTitleText" : "骑手认证"
+				"navigationBarTitleText" : "骑手认证",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path" : "pages/acceptOrders/acceptOrders",
+			"style" : 
+			{
+				"navigationBarTitleText" : "骑手订单",
+				"enablePullDownRefresh": false
 			}
 		}
 	

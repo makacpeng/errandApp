@@ -32,6 +32,12 @@ public class CertificationService {
         }
         certificationMapper.insert(certification);
     }
+    /**
+     *  登陆时获取用户ID
+     */
+    public Certification selectByUserId(Integer userId) {
+        return certificationMapper.selectByUserId(userId);
+    }
 
     /**
      * 查询当前用户的认证信息

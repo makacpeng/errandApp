@@ -5,20 +5,15 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import com.example.common.enums.OrderStatusEnum;
 import com.example.common.enums.ResultCodeEnum;
-import com.example.entity.Account;
-import com.example.entity.Address;
-import com.example.entity.Orders;
-import com.example.entity.User;
+import com.example.entity.*;
 import com.example.exception.CustomException;
 import com.example.mapper.OrdersMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.awt.font.FontRenderContext;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -35,8 +30,8 @@ public class OrdersService {
 
     @Resource
     AddressService addressService;
-
-
+    @Resource
+    private CertificationService certificationService;
     @Resource
     private OrdersMapper ordersMapper;
 
@@ -80,6 +75,8 @@ public class OrdersService {
         orders.setAddress(address);  // 取货地址
         Address targetAddress = addressService.selectById(orders.getTargetId());
         orders.setTargetAddress(targetAddress);  // 收货地址
+        Certification certification = certificationService.selectByUserId(orders.getAcceptId());
+        orders.setCertification(certification);
         return orders;
     }
 
@@ -126,4 +123,11 @@ public class OrdersService {
     }
 
 
+    public void accept(Orders orders) {
+        Account currentUser = TokenUtils.getCurrentUser();  // 骑手用户
+        orders.setAcceptId(currentUser.getId());
+        orders.setAcceptTime(DateUtil.now());
+        orders.setStatus(OrderStatusEnum.NO_ARRIVE.getValue());
+        this.updateById(orders);
+    }
 }

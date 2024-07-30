@@ -3,6 +3,10 @@
 		<view style="text-align: center;">
 			<image :src="user.avatar" style="width: 200rpx; height: 200rpx; border-radius: 50%;"></image>
 			<view style="margin: 10rpx 0;">{{ user.name }}</view>
+			<view v-if="user.isRider">
+			<uni-icons color="#006eff" type="vip-filled" size="18" style="position: relative; top: 2rpx;"></uni-icons>	
+			<text style="color: #006eff; font-weight: bold;">认证骑手</text>
+			</view>
 		</view>
 		
 		
@@ -36,7 +40,7 @@
 					<image src="../../static/imgs/认证.png" style="width: 30%;" mode="widthFix"></image>
 					<view style="flex: 1;">骑手认证</view>
 				</view>
-				<view class="cartegory-item" @click="goPage('')">
+				<view class="cartegory-item" @click="goPage('/pages/acceptOrders/acceptOrders')">
 					<image src="../../static/imgs/跑腿.png" style="width: 30%;" mode="widthFix"></image>
 					<view style="flex: 1;">骑手订单</view>
 				</view>

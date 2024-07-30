@@ -6,6 +6,7 @@ import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.entity.Admin;
+import com.example.entity.Certification;
 import com.example.entity.User;
 import com.example.exception.CustomException;
 import com.example.mapper.UserMapper;
@@ -26,6 +27,8 @@ public class UserService {
 
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private CertificationService certificationService;
 
     public void add(User user) {
         User dbUser = this.selectByUsername(user.getUsername());
@@ -89,6 +92,8 @@ public class UserService {
         String tokenData = dbUser.getId() + "-" + RoleEnum.USER.name();
         String token = TokenUtils.createToken(tokenData, dbUser.getPassword());
         dbUser.setToken(token);
+        Certification certification = certificationService.selectByUserId(dbUser.getId());  // 查询当前登录用户的骑手认证信息
+        dbUser.setIsRider(ObjectUtil.isNotNull(certification) && "通过".equals(certification.getStatus()));
         return dbUser;
     }
 

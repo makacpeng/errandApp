@@ -1,6 +1,6 @@
 <template>
 	<view style="padding: 20rpx;">
-		<view class="box">
+		<view class="box" v-if="orders.id">
 			<view class="line" style="margin-bottom: 40rpx;">
 				<view class="line-title">订单编号：</view>
 				<view class="line-content">{{ orders.orderNo }}</view>
@@ -65,6 +65,23 @@
 			<view class="line" style="margin-bottom: 40rpx;">
 				<view class="line-title">备注：</view>
 				<view class="line-content">{{ orders.comment }}</view>
+			</view>
+			
+			<view class="line">
+							<view class="line-title">骑手姓名：</view>
+							<view class="line-content">{{ orders.certification.name }}</view>
+			</view>
+						
+			<view class="line">
+							<view class="line-title">骑手电话：</view>
+							<view class="line-content">{{ orders.certification.phone }}</view>
+			</view>
+						
+			<view class="line">
+							<view class="line-title">骑手照片：</view>
+							<view class="line-content">
+							<image :src="orders.certification.avatar" mode="widthFix" style="width: 180rpx;"></image>
+			</view>
 			</view>
 			
 			<view><button type="primary" class="my-button-primary" @click="back">确认</button></view>
