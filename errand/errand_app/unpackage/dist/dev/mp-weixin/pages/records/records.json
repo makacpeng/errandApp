@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "收支明细",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-tag": "/uni_modules/uni-tag/components/uni-tag/uni-tag"
+  }
+}

@@ -6,4 +6,5 @@ public interface Constants {
 
     String USER_DEFAULT_PASSWORD = "123";
 
+    String REDIS_COMMENT_KEY = "errand:comment:";
 }
