@@ -49,7 +49,7 @@
 			"path" : "pages/comment/comment",
 			"style" : 
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "评价"
 			}
 		},
 		{
@@ -95,6 +95,35 @@
 			{
 				"navigationBarTitleText" : "骑手订单",
 				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path" : "pages/records/records",
+			"style" : 
+			{
+				"navigationBarTitleText" : "收支明细",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path" : "pages/wallet/wallet",
+			"style" : 
+			{
+				"navigationBarTitleText" : "钱包"
+			}
+		},
+		{
+			"path" : "pages/charge/charge",
+			"style" : 
+			{
+				"navigationBarTitleText" : "充值"
+			}
+		},
+		{
+			"path" : "pages/myComment/myComment",
+			"style" : 
+			{
+				"navigationBarTitleText" : "评价中心"
 			}
 		}
 	

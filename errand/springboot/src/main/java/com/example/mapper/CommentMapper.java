@@ -33,4 +33,5 @@ public interface CommentMapper {
      */
     List<Comment> selectAll(Comment comment);
 
+    List<Comment> selectComment(Integer userId);
 }

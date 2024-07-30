@@ -18,15 +18,15 @@
 					<image src="../../static/imgs/地址.png" style="width: 50%;" mode="widthFix"></image>
 					<view style="flex: 1;">我的地址</view>
 				</view>
-				<view class="cartegory-item" @click="goPage('')">
+				<view class="cartegory-item" @click="goPage('/pages/records/records')">
 					<image src="../../static/imgs/收支.png" style="width: 50%;" mode="widthFix"></image>
 					<view style="flex: 1;">收支明细</view>
 				</view>
-				<view class="cartegory-item" @click="goPage('')">
+				<view class="cartegory-item" @click="goPage('/pages/myComment/myComment')">
 					<image src="../../static/imgs/评价.png" style="width: 50%;" mode="widthFix"></image>
 					<view style="flex: 1;">评价中心</view>
 				</view>
-				<view class="cartegory-item" @click="goPage('')">
+				<view class="cartegory-item" @click="goPage('/pages/wallet/wallet')">
 					<image src="../../static/imgs/钱包.png" style="width: 50%;" mode="widthFix"></image>
 					<view style="flex: 1;">我的钱包</view>
 				</view>

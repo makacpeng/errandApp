@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import com.example.common.enums.OrderStatusEnum;
+import com.example.common.enums.RecordsTypeEnum;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.entity.*;
 import com.example.exception.CustomException;
@@ -12,6 +13,7 @@ import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -62,7 +64,20 @@ public class OrdersService {
     /**
      * 修改
      */
+    @Transactional
     public void updateById(Orders orders) {
+        if (OrderStatusEnum.NO_RECEIVE.getValue().equals(orders.getStatus())) {
+            // 骑手送达了订单
+            //  打钱
+            Integer acceptId = orders.getAcceptId();
+            User user = userService.selectById(acceptId);
+            user.setAccount(user.getAccount().add(BigDecimal.valueOf(orders.getPrice())));
+            userService.updateById(user);
+            // 记录收支明细
+            RecordsService.addRecord("接单" + orders.getName(), BigDecimal.valueOf(orders.getPrice()), RecordsTypeEnum.INCOME.getValue());
+        }else if(OrderStatusEnum.CANCEL.getValue().equals(orders.getStatus())){
+            RecordsService.addRecord("取消订单" + orders.getName(), BigDecimal.valueOf(orders.getPrice()), RecordsTypeEnum.CANCEL.getValue());
+        }
         ordersMapper.updateById(orders);
     }
 
@@ -120,6 +135,8 @@ public class OrdersService {
         orders.setTime(DateUtil.now());
         ordersMapper.insert(orders);
 
+        // 记录收支明细
+        RecordsService.addRecord("下单" + orders.getName(), BigDecimal.valueOf(orders.getPrice()), RecordsTypeEnum.OUT.getValue());
     }
 
 
@@ -129,5 +146,7 @@ public class OrdersService {
         orders.setAcceptTime(DateUtil.now());
         orders.setStatus(OrderStatusEnum.NO_ARRIVE.getValue());
         this.updateById(orders);
+
+
     }
 }

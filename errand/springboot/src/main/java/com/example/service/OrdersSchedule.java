@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import com.example.common.enums.OrderStatusEnum;
+import com.example.common.enums.RecordsTypeEnum;
 import com.example.entity.Orders;
 import com.example.entity.User;
 import org.slf4j.Logger;
@@ -44,6 +45,9 @@ public class OrdersSchedule {
                 User user = userService.selectById(orders.getUserId());
                 user.setAccount(user.getAccount().add(BigDecimal.valueOf(orders.getPrice())));
                 userService.updateById(user);
+
+                // 记录收支明细
+                RecordsService.addRecord("取消订单" + orders.getName(), BigDecimal.valueOf(orders.getPrice()), RecordsTypeEnum.CANCEL.getValue());
             }
         }
 

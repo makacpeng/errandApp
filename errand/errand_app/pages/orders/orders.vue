@@ -41,6 +41,8 @@
 							<text style="color: #888;" @click.native.stop="handleDel(item.id)">删除</text>
 						</view>
 						<uni-tag text="确认收货" type="primary" size="small" v-if="item.status === '待收货'" @click.native.stop="changeStatus(item,'待评价')"></uni-tag>
+						<uni-tag text="取消订单" type="default" size="small" v-if="item.status === '待接单'" @click.native.stop="changeStatus(item, '已取消')"></uni-tag>
+						<uni-tag text="评价" type="success" size="small" v-if="item.status === '待评价'" @click.native.stop="goComment(item.id)"></uni-tag>
 					</view>
 				</view>
 			</view>
@@ -72,6 +74,11 @@
 			this.load()
 		},
 		methods: {
+			goComment(orderId){
+				uni.navigateTo({
+					url:'/pages/comment/comment?orderId=' + orderId
+				})
+			},
 			changeStatus(orders, status) {
 			  orders.status = status
 			  this.$request.put('/orders/update', orders).then(res => {

@@ -25,6 +25,13 @@
         where id = #{id}
     </select>
 
+    <select id="selectComment" resultType="com.example.entity.Comment">
+        select
+        <include refid="Base_Column_List" />
+        from comment
+        where user_id = #{userId} or accept_id = #{userId}
+    </select>
+
     <delete id="deleteById">
         delete from comment
         where  id = #{id}

@@ -64,7 +64,7 @@
 			</view>
 			<view class="line" style="margin-bottom: 40rpx;">
 				<view class="line-title">备注：</view>
-				<view class="line-content">{{ orders.comment }}</view>
+				<view class="line-content">{{ orders.comment ||''}}</view>
 			</view>
 			
 			<view class="line">
@@ -80,11 +80,13 @@
 			<view class="line">
 							<view class="line-title">骑手照片：</view>
 							<view class="line-content">
-							<image :src="orders.certification.avatar" mode="widthFix" style="width: 180rpx;"></image>
+							<view v-if="orders.certification">
+								<image :src="orders.certification.avatar" mode="widthFix" style="width: 180rpx;"></image>
+							</view>
 			</view>
 			</view>
 			
-			<view><button type="primary" class="my-button-primary" @click="back">确认</button></view>
+			<view style="margin-top: 20rpx;"><button type="primary" class="my-button-primary" @click="back">确认</button></view>
 		</view>
 	</view>
 </template>

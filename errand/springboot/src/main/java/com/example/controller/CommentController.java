@@ -82,5 +82,12 @@ public class CommentController {
         PageInfo<Comment> page = commentService.selectPage(comment, pageNum, pageSize);
         return Result.success(page);
     }
-
+    /**
+     * 查询用户或者骑手的评价信息
+     */
+    @GetMapping("/selectComment")
+    public Result selectComment() {
+        List<Comment> list = commentService.selectComment();
+        return Result.success(list);
+    }
 }

@@ -56,6 +56,11 @@ public class UserController {
         return Result.success();
     }
 
+    @PutMapping("/charge/{money}")
+    public Result charge(@PathVariable Double money) {
+        userService.charge(money);
+        return Result.success();
+    }
     /**
      * 根据ID查询
      */
