@@ -10,7 +10,8 @@
 			</swiper>
 		</view>
 		
-		<view style="margin-bottom: 20rpx;">
+		<!-- 消息通知 -->
+		<view class="notice" >
 			<uni-notice-bar v-if="content" show-icon single :text="content" />
 		</view>
 		
@@ -174,6 +175,19 @@
 			width: 700rpx;
 			margin: 0 auto;
 			margin-top: 30rpx;
+			border-radius: 15rpx;
+			overflow: hidden;
+		}
+		.notice{
+			
+			width: 700rpx;
+			height: 90rpx;
+			margin: 0 auto;
+			margin-bottom: 20rpx;
+			border-radius: 45rpx;	
+			
+			overflow: hidden;
+			
 		}
 		.func{
 			background-color: rgba(255,255,255,0);
@@ -185,7 +199,7 @@
 			padding:0;
 			margin: 0 auto;
 			text-align: center;
-			font-size: 36rpx;
+			
 			.big{
 				z-index: 1;
 				grid-column: 1/1;
@@ -197,9 +211,11 @@
 				flex-flow: column;
 				justify-content: center;
 				align-items: center;
+				font-size: 35rpx;
 				image{
-					height: 250rpx;
-					width: 250rpx;
+					height: 200rpx;
+					width: 200rpx;
+					margin-bottom: 15rpx;
 				}
 				
 				
@@ -224,10 +240,14 @@
 				flex-flow: column;
 				justify-content: center;
 				align-items: center;
+				font-size: 25rpx;
+				
 				image{
-					height: 120rpx;
-					width: 120rpx;
+					height: 80rpx;
+					width: 80rpx;
+					margin-bottom: 10rpx;
 				}
+
 			}
 			
 			.small1::after{
@@ -257,11 +277,12 @@
 				position: relative;
 				display: flex;
 				align-items: center;
+				padding-left: 50rpx;
 				border-radius: 15rpx;
 				background-color: #fff;
 				image{
-					width: 180rpx;
-					height: 150rpx;
+					width: 120rpx;
+					height: 120rpx;
 				}
 			}
 			.flower::after{
@@ -282,7 +303,7 @@
 			background-color: #fff;
 			padding: 20rpx;
 			border-radius: 10rpx;
-			box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, .1);
+			// box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, .1);
 		}
 	}
 	

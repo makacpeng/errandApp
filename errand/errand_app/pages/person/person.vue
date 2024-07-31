@@ -7,7 +7,7 @@
 						fileMediatype="image" v-model="imgs"  @select="handleImgUploadSuccess"></uni-file-picker>
 
 				</uni-forms-item>
-				<uni-forms-item label="账号" name="username">
+				<uni-forms-item label="昵称" name="username">
 					<uni-easyinput type="text" v-model="form.username" placeholder="" disabled />
 				</uni-forms-item>
 				<uni-forms-item label="密码" name="password" required>

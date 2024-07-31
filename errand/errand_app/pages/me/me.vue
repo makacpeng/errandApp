@@ -15,19 +15,19 @@
 			<view class="title">用户服务</view>
 			<view style="display: flex;">
 				<view class="cartegory-item" @click="goPage('/pages/address/address')">
-					<image src="../../static/imgs/地址.png" style="width: 50%;" mode="widthFix"></image>
+					<image src="../../static/imgs/地址.png"></image>
 					<view style="flex: 1;">我的地址</view>
 				</view>
 				<view class="cartegory-item" @click="goPage('/pages/records/records')">
-					<image src="../../static/imgs/收支.png" style="width: 50%;" mode="widthFix"></image>
+					<image src="../../static/imgs/收支.png"></image>
 					<view style="flex: 1;">收支明细</view>
 				</view>
 				<view class="cartegory-item" @click="goPage('/pages/myComment/myComment')">
-					<image src="../../static/imgs/评价.png" style="width: 50%;" mode="widthFix"></image>
+					<image src="../../static/imgs/评价.png"></image>
 					<view style="flex: 1;">评价中心</view>
 				</view>
 				<view class="cartegory-item" @click="goPage('/pages/wallet/wallet')">
-					<image src="../../static/imgs/钱包.png" style="width: 50%;" mode="widthFix"></image>
+					<image src="../../static/imgs/钱包.png"></image>
 					<view style="flex: 1;">我的钱包</view>
 				</view>
 			</view>
@@ -36,7 +36,7 @@
 		<view style="margin: 20rpx 0; " class="box">
 			<view class="title">骑手服务</view>
 			<view style="display: flex;">
-				<view class="cartegory-item" @click="goPage('/pages/certification/certification')">
+				<view class="cartegory-item line" @click="goPage('/pages/certification/certification')">
 					<image src="../../static/imgs/认证.png" style="width: 30%;" mode="widthFix"></image>
 					<view style="flex: 1;">骑手认证</view>
 				</view>
@@ -94,19 +94,24 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
 .title {
 	font-weight: bold;
-	font-size: 36rpx;
+	font-size: 25rpx;
 	margin-bottom: 30rpx;
 }
 .cartegory-item {
 	flex: 1; 
 	display: flex; 
+	flex-direction: column; 
 	justify-content: space-between; 
 	align-items: center; 
-	flex-direction: column; 
 	grid-gap: 10rpx;
+	image{
+		width: 50rpx;
+		height: 50rpx;
+	}
+	
 }
 .info-item {
 	padding: 15rpx; 
@@ -115,5 +120,18 @@
 .info-item .uni-icons {
 	position: relative;
 	top: 2rpx;
+}
+// 骑手服务之间的分隔线
+.line{
+	position: relative;
+}
+.line::after{
+	content: "";
+	position: absolute;
+	width: 1rpx;
+	height: 130rpx;
+	background-color: #f0f0f0;
+	right: 0;
+	top: 0;
 }
 </style>
