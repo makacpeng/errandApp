@@ -85,9 +85,9 @@ public class CommentController {
     /**
      * 查询用户或者骑手的评价信息
      */
-    @GetMapping("/selectComment/{userId}")
-    public Result selectComment(@PathVariable Integer userId) {
-        List<Comment> list = commentService.selectComment(userId);
+    @GetMapping("/selectComment")
+    public Result selectComment() {
+        List<Comment> list = commentService.selectComment();
         return Result.success(list);
     }
 }

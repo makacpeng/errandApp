@@ -1,19 +1,18 @@
 package com.example.service;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
-import com.example.common.Constants;
 import com.example.common.enums.OrderStatusEnum;
+import com.example.entity.Account;
 import com.example.entity.Comment;
 import com.example.entity.Orders;
 import com.example.mapper.CommentMapper;
-import com.example.utils.RedisUtils;
+import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -40,26 +39,13 @@ public class CommentService {
         Orders orders = ordersService.selectById(orderId);
         orders.setStatus(OrderStatusEnum.DONE.getValue());  // 已完成
         ordersService.updateById(orders);
-        this.setCache(comment);
-    }
-
-    // 更新用户的缓存评论
-    public void setCache(Comment comment) {
-        // 查询出当前用户的所有评论信息
-        List<Comment> commentList = commentMapper.selectUserComment(comment.getUserId());
-        List<Comment> acceptCommentList = commentMapper.selectAcceptComment(comment.getAcceptId());
-        RedisUtils.setCacheObject(Constants.REDIS_COMMENT_KEY + comment.getUserId(), commentList);  //设置用户缓存
-        RedisUtils.setCacheObject(Constants.REDIS_COMMENT_KEY + comment.getAcceptId(), acceptCommentList);  //设置骑手缓存
     }
 
     /**
      * 删除
      */
     public void deleteById(Integer id) {
-        Comment comment = this.selectById(id);
         commentMapper.deleteById(id);
-        // 删除之后设置评价信息
-        this.setCache(comment);
     }
 
     /**
@@ -67,7 +53,7 @@ public class CommentService {
      */
     public void deleteBatch(List<Integer> ids) {
         for (Integer id : ids) {
-            this.deleteById(id);
+            commentMapper.deleteById(id);
         }
     }
 
@@ -103,16 +89,8 @@ public class CommentService {
     /**
      * 查询用户或骑手的评价信息
      */
-    public List<Comment> selectComment(Integer userId) {
-        // 先查询缓存
-        List<Comment> commentList = RedisUtils.getCacheObject(Constants.REDIS_COMMENT_KEY + userId);
-        if (CollUtil.isEmpty(commentList)) {  // 以防万一  万一缓存没查询到  从数据库查询下保底
-            //  从数据库查询所有的评论信息
-            commentList = commentMapper.selectComment(userId);
-            for (Comment comment : commentList) {
-                this.setCache(comment);  // 设置缓存
-            }
-        }
-        return commentList;
+    public List<Comment> selectComment() {
+        Account currentUser = TokenUtils.getCurrentUser();
+        return commentMapper.selectComment(currentUser.getId());
     }
 }
