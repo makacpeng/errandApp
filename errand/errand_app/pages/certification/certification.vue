@@ -165,7 +165,7 @@
 				uni.uploadFile({
 					url: _this.$baseUrl + '/files/upload', //自己的后端接口（默认发送post请求） 注意 _this.$baseUrl需要在全局变量定义
 					filePath: filePath,
-					name: "file", //这里应为自己后端文件形参的名字
+					name: "file", 
 					success(res) {
 						let url = JSON.parse(res.data || '{}').data // 获取返回的图像链接
 						_this.form.avatar = url // 给表单图像属性赋值
@@ -179,7 +179,7 @@
 				uni.uploadFile({
 					url: _this.$baseUrl + '/files/upload', //自己的后端接口（默认发送post请求） 注意 _this.$baseUrl需要在全局变量定义
 					filePath: filePath,
-					name: "file", //这里应为自己后端文件形参的名字
+					name: "file", 
 					success(res) {
 						let url = JSON.parse(res.data || '{}').data // 获取返回的图像链接
 						_this.form.card1 = url // 给表单图像属性赋值
@@ -192,7 +192,7 @@
 				uni.uploadFile({
 					url: _this.$baseUrl + '/files/upload', //自己的后端接口（默认发送post请求） 注意 _this.$baseUrl需要在全局变量定义
 					filePath: filePath,
-					name: "file", //这里应为自己后端文件形参的名字
+					name: "file", 
 					success(res) {
 						let url = JSON.parse(res.data || '{}').data // 获取返回的图像链接
 						_this.form.card2 = url // 给表单图像属性赋值
